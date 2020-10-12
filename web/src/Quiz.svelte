@@ -1,8 +1,7 @@
 <script>
     import CollectionQuestions from './CollectionQuestions.svelte';
     export var quiz;
-    var quizDoc = quiz.ref.parent.doc(quiz.id);
-    var questionsColl = quizDoc.collection('questions');
+    var questionsColl = quiz.ref.collection('questions');
 </script>
 
 <div class="quizes">
