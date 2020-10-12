@@ -6,7 +6,6 @@
     const quizCol = firestoreDb.collection('quiz');
     const questionsCol = firestoreDb.collection('questions');
     
-    var quizList = [];
     var newQuizTitle;
 
 	function newQuiz() {

@@ -3,13 +3,10 @@
     var responsesList = [];
 
     collection.onSnapshot(
-        async  querySnapshot => {
+        responsesSnapshot => {
             responsesList = [];
-            querySnapshot.forEach(
-                async docSnap => {
-                    var response = docSnap.data();
-                    responsesList = [...responsesList, response];
-                }
+            responsesSnapshot.forEach(
+                responseSnap => responsesList = [...responsesList, responseSnap]
             )
             console.log('Got updated responses!');
         }
@@ -19,7 +16,7 @@
 <div class="responses">
     {#each responsesList as response}
     <div>
-        <input value={response.title}>
+        <input value={response.data().title}>
         <input type="checkbox" checked={response.valid}>
     </div>
     {/each}

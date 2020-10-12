@@ -1,5 +1,5 @@
 <script>
-    import CollectionQuestions from './CollectionQuestions.svelte';
+    import Quiz from './Quiz.svelte';
 
     export var collection;
 
@@ -7,14 +7,10 @@
 
     collection.orderBy('date','desc')
         .onSnapshot(
-            async querySnapshot => {
+            async quizSnapshot => {
                 quizList = [];
-                querySnapshot.forEach(
-                    async docSnap => {
-                        var quest = docSnap.data();
-                        quest.questionsColl = collection.doc(docSnap.id).collection('questions');
-                        quizList = [...quizList, quest];
-                    }
+                quizSnapshot.forEach(
+                    quizSnap => quizList = [...quizList, quizSnap]
                 )
                 console.log('Got updated quizs!');
             }
@@ -26,21 +22,9 @@
     <p>Empieza creando tu primer quiz!</p>
     {:else}
     {#each quizList as quiz}
-    <div class="quiz">
-        <input value={quiz.title}>
-        <CollectionQuestions collection={quiz.questionsColl}/>
-    </div>
+    <Quiz quiz={quiz}/>
     {/each}
     {/if}
 </section>
 
-<style>
-    div.quiz {
-        margin: 10px;
-        border-style: solid;
-        border-radius: 10px;
-    }
-    div.quiz > input {
-        font-weight: bolder;
-    }
-</style>
+<style></style>

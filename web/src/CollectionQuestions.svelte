@@ -1,17 +1,14 @@
 <script>
-    import CollectionResponses from './CollectionResponses.svelte'
+    import Question from './Question.svelte';
     export var collection;
+
     var questionsList = [];
 
     collection.onSnapshot(
         async  querySnapshot => {
             questionsList = [];
             querySnapshot.forEach(
-                async docSnap => {
-                    var question = docSnap.data();
-                    question.responsesColl = collection.doc(docSnap.id).collection('responses');
-                    questionsList = [...questionsList, question];
-                }
+                async docSnap => questionsList = [...questionsList, docSnap]
             )
             console.log('Got updated questions!');
         }
@@ -20,8 +17,7 @@
 
 <div class="questions">
     {#each questionsList as question}
-        <input value={question.title}/>
-        <CollectionResponses collection={question.responsesColl}/>
+        <Question question={question}/>
     {/each}
 </div>
 
