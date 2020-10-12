@@ -25,7 +25,4 @@
     div.questions {
         margin-left: 20px;
     }
-    div.questions > input {
-        display: block;
-    }
 </style>
