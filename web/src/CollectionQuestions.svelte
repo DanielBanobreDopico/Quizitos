@@ -1,4 +1,5 @@
 <script>
+    import NewQuestion from './NewQuestion.svelte';
     import Question from './Question.svelte';
     export var collection;
 
@@ -8,7 +9,7 @@
         async  querySnapshot => {
             questionsList = [];
             querySnapshot.forEach(
-                async docSnap => questionsList = [...questionsList, docSnap]
+                async docSnap => questionsList = [docSnap, ...questionsList]
             )
             console.log('Got updated questions!');
         }
@@ -19,6 +20,7 @@
     {#each questionsList as question}
         <Question question={question}/>
     {/each}
+    <NewQuestion collection={collection}/>
 </div>
 
 <style>

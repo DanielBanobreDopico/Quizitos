@@ -1,4 +1,5 @@
 <script>
+    import NewQuiz from './NewQuiz.svelte';
     import Quiz from './Quiz.svelte';
 
     export var collection;
@@ -11,21 +12,14 @@
             async quizzesSnapshot => {
                 quizzesList = [];
                 quizzesSnapshot.forEach(
-                    quizSnap => quizzesList = [...quizzesList, quizSnap]
+                    // Algo va mal en la actualización del contenido de la colección de quizzitos
+                    // dependiendo del orden natural de los quizzes, el orden en el que solicitan 
+                    // y el orden en el que se incorporan al array
+                    async quizSnap => quizzesList = [quizSnap, ...quizzesList]
                 )
                 console.log('Got updated quizzes!');
             }
         );
-
-    /*function newQuiz() {
-        var quizDoc = {
-            title: newQuizTitle,
-            date: Date.now(),
-        }
-        collection.add(quizDoc);
-        newQuizTitle = '';
-		console.log('Quiz added.');
-	}*/
 </script>
 
 <section id="quizzes">
@@ -36,8 +30,7 @@
     <Quiz quiz={quiz}/>
     {/each}
     {/if}
-    <!--input placeholder="Nuevo quiz..." bind:value={newQuizTitle}>
-    <button on:click="{newQuiz}">+</button-->
+    <NewQuiz collection={collection}/>
 </section>
 
 <style></style>

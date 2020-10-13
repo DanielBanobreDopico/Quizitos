@@ -20,7 +20,7 @@
 				result=>{
 					var token = result.credential.accessToken;
 					user = result.user;
-					console.log('User arrives:', user)
+					console.log('User arrives.')
 				}
 			)
 			.catch(

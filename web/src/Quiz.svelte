@@ -4,7 +4,7 @@
 
     var questionsColl = quiz.ref.collection('questions');
 
-    var title;
+    var title = quiz.data().title;
 
     var timeout = 1000;
     var timer = null;
@@ -26,9 +26,8 @@
     }
 
     async function saveQuiz () {
-        quiz.ref.set(
-            {title: title},
-            {merge: true}
+        quiz.ref.update(
+            {title: title}
         );
         console.log("Quiz saved.")
     }

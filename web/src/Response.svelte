@@ -9,9 +9,13 @@
 
     response.ref.onSnapshot(
         async responseSnapshot => {
-            console.log('Got updated response!');
-            title = responseSnapshot.data().title;
-            valid = responseSnapshot.data().valid;
+            if (responseSnapshot.exists) {
+                console.log('Got updated response!');
+                title = responseSnapshot.data().title;
+                valid = responseSnapshot.data().valid;
+            } else {
+                console.log('Response removed.')
+            }
         }
     );
 
@@ -21,13 +25,11 @@
     }
 
     async function saveResponse () {
-        await response.ref.set(
-            {
-                title: title,
-                valid: valid,
-            },
-            {merge: true}
-        );
+        var responseDoc = {
+            title: title,
+            valid: valid,
+        };
+        await response.ref.update(responseDoc);
         console.log("Question saved.")
     }
 

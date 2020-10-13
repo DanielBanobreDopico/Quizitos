@@ -11,8 +11,12 @@
 
     question.ref.onSnapshot(
         async questionSnapshot => {
-            console.log('Got updated question!');
-            title = questionSnapshot.data().title;
+            if (questionSnapshot.exists) {
+                console.log('Got updated question!');
+                title = questionSnapshot.data().title;
+            } else {
+                console.log('Question removed.')
+            }
         }
     );
 
@@ -22,9 +26,8 @@
     }
 
     async function saveQuestion () {
-        question.ref.set(
-            {title: title},
-            {merge: true}
+        question.ref.update(
+            {title: title}
         );
         console.log("Question saved.")
     }
