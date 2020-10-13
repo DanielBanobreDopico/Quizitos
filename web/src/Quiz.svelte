@@ -1,34 +1,51 @@
 <script>
     import CollectionQuestions from './CollectionQuestions.svelte';
     export var quiz;
-    var title = quiz.data().title;
+
     var questionsColl = quiz.ref.collection('questions');
+
+    var title;
+
+    var timeout = 1000;
     var timer = null;
+
+    quiz.ref.onSnapshot(
+        async quizSnapshot => {
+            if (quizSnapshot.exists) {
+                console.log('Got updated quiz!');
+                title = quizSnapshot.data().title;
+            } else {
+                console.log('Quiz removed.')
+            }
+        }
+    );
+
     async function startTimer () {
         if ( timer ) clearTimeout(timer);
-        timer = setTimeout(saveQuiz,1000);
+        timer = setTimeout(saveQuiz,timeout);
     }
+
     async function saveQuiz () {
-        console.log("Aquí se guardaría...")
         quiz.ref.set(
             {title: title},
             {merge: true}
         );
+        console.log("Quiz saved.")
     }
 </script>
 
-<div class="quizes">
+<div class="quiz">
     <input on:input={startTimer} bind:value={title}>
     <CollectionQuestions collection={questionsColl}/>
 </div>
 
 <style>
-    div.quizes {
+    div.quiz {
         margin: 10px;
         border-style: solid;
         border-radius: 10px;
     }
-    div.quizes > input {
+    div.quiz > input {
         font-weight: bolder;
     }
 </style>

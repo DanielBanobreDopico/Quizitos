@@ -1,4 +1,5 @@
 <script>
+    import Response from './Response.svelte'
     export var collection;
     var responsesList = [];
 
@@ -15,10 +16,7 @@
 
 <div class="responses">
     {#each responsesList as response}
-    <div>
-        <input value={response.data().title}>
-        <input type="checkbox" checked={response.valid}>
-    </div>
+    <Response response={response}/>
     {/each}
 </div>
 
