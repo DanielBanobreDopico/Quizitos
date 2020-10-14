@@ -15,7 +15,7 @@
 </script>
 
 <div class="responses">
-    {#each responsesList as response}
+    {#each responsesList as response (response.id)}
     <Response response={response}/>
     {/each}
 </div>

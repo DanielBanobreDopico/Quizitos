@@ -1,11 +1,11 @@
 <script>
     import {firestoreDb} from './firebase';
-    import CollectionQuiz from './CollectionQuiz.svelte';
+    import CollectionQuizzes from './CollectionQuizzes.svelte';
     const quizCol = firestoreDb.collection('quiz');
 </script>
 
 <section>
     <h1>Panel de control</h1>
     <h3>Tus quiz:</h3>
-    <CollectionQuiz collection={quizCol}/>
+    <CollectionQuizzes collection={quizCol}/>
 </section>

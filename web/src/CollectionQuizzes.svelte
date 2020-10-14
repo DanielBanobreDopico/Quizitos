@@ -12,10 +12,7 @@
             async quizzesSnapshot => {
                 quizzesList = [];
                 quizzesSnapshot.forEach(
-                    // Algo va mal en la actualización del contenido de la colección de quizzitos
-                    // dependiendo del orden natural de los quizzes, el orden en el que solicitan 
-                    // y el orden en el que se incorporan al array
-                    async quizSnap => quizzesList = [quizSnap, ...quizzesList]
+                    async quizSnap => quizzesList = [...quizzesList, quizSnap]
                 )
                 console.log('Got updated quizzes!');
             }
@@ -26,7 +23,7 @@
     {#if quizzesList.length === 0}
     <p>Empieza creando tu primer Quizito!</p>
     {:else}
-    {#each quizzesList as quiz}
+    {#each quizzesList as quiz (quiz.id)}
     <Quiz quiz={quiz}/>
     {/each}
     {/if}

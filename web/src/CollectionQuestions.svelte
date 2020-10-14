@@ -9,7 +9,7 @@
         async  querySnapshot => {
             questionsList = [];
             querySnapshot.forEach(
-                async docSnap => questionsList = [docSnap, ...questionsList]
+                async docSnap => questionsList = [...questionsList, docSnap]
             )
             console.log('Got updated questions!');
         }
@@ -17,7 +17,7 @@
 </script>
 
 <div class="questions">
-    {#each questionsList as question}
+    {#each questionsList as question (question.id)}
         <Question question={question}/>
     {/each}
     <NewQuestion collection={collection}/>
