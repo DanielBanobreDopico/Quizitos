@@ -7,7 +7,7 @@
     var quizzesList = [];
     var newQuizTitle;
 
-    collection.orderBy('date','desc')
+    collection.where('deleted', '==', false).orderBy('date','desc')
         .onSnapshot(
             async quizzesSnapshot => {
                 quizzesList = [];

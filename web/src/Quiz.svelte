@@ -31,10 +31,18 @@
         );
         console.log("Quiz saved.")
     }
+
+    async function deleteQuiz () {
+        quiz.ref.update(
+            {deleted: true}
+        );
+        console.log("Quiz deleted (not really).");
+    }
 </script>
 
 <div class="quiz">
     <input on:input={startTimer} bind:value={title}>
+    <button on:click={deleteQuiz}>x</button>
     <CollectionQuestions collection={questionsColl}/>
 </div>
 

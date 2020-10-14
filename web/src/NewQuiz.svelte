@@ -5,6 +5,7 @@
         var quizDoc = {
             title: newQuizTitle,
             date: Date.now(),
+            deleted: false,
         }
         collection.add(quizDoc);
         newQuizTitle = '';
