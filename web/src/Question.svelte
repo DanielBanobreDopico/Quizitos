@@ -32,9 +32,16 @@
         console.log("Question saved.")
     }
 
+    async function deleteQuestion () {
+        question.ref.update(
+            {deleted: true}
+        );
+        console.log("Question deleted (not really).");
+    }
 </script>
 
 <div class="question">
         <input on:input={startTimer} bind:value={title}/>
+        <button on:click={deleteQuestion}>x</button>
         <CollectionResponses collection={responsesColl}/>
 </div>

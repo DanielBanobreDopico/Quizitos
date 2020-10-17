@@ -4,6 +4,7 @@
     async function newQuestion () {
         var questionDoc = {
             title: newQuestionTitle,
+            deleted: false,
         }
         var doc = await collection.add(questionDoc);
         doc.collection('responses').add({title: null, valid: false});

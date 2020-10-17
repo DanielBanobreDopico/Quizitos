@@ -5,7 +5,7 @@
 
     var questionsList = [];
 
-    collection.onSnapshot(
+    collection.where('deleted', '==', false).onSnapshot(
         async  querySnapshot => {
             questionsList = [];
             querySnapshot.forEach(
