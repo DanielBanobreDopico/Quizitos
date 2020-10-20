@@ -1,5 +1,4 @@
 <script>
-    import CollectionResponses from './CollectionResponses.svelte'
     export var response;
 
     var title, valid;
