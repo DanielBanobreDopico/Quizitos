@@ -61,7 +61,8 @@
             date: date,
             publicCode: code,
             currentQuestion: 0,
-            running: true,
+            running: false,
+            finished: false,
         }
         var castRef = await castsColl.add(castDoc);
         cast = await castRef.get();
